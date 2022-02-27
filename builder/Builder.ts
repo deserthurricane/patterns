@@ -95,7 +95,7 @@ class FullProductDirector<Product> extends ADirector<Product> {
  */
 function clientCode() {
   const charTextBuilder = new CharTextBuilder();
-  const mvpCharTextDirector = new MVPDirector(charTextBuilder);
+  const mvpCharTextDirector = new MVPDirector(charTextBuilder); // директор может работать с любым подклассом строителя
   mvpCharTextDirector.build();
 
   const mvpResult = charTextBuilder.getResult();
