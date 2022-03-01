@@ -1,19 +1,32 @@
+/**
+ * Общий интерфейс всех подписчиков
+ */
 interface IObserver {
   update(val: number): void;
 }
 
+/**
+ * Конкретный класс подписчика (выводит обновление в консоль)
+ */
 class ConsoleObserver implements IObserver {
   update(val: number) {
     console.log('log: ', val);
   }
 }
 
+/**
+ * Конкретный класс подписчика (выводит обновление в алерт)
+ */
 class AlertObserver implements IObserver {
   update(val: number) {
     console.log('alert: ', val);
   }
 }
 
+/**
+ * Менеджер событий / Издатель
+ * Служебный класс, управляющий подпиской на события объектов-потребителей
+ */
 class Publisher {
   listeners: IObserver[] = [];
 
@@ -40,9 +53,12 @@ class Publisher {
   }
 }
 
+/**
+ * Объект, содержащий в себе состояние, на которое хотят подписаться другие объекты
+ */
 class Counter {
   private count: number = 0;
-  publisher: Publisher;
+  publisher: Publisher; // содержит ссылку на менеджера событий
 
   constructor(publisher: Publisher) {
     this.publisher = publisher;
@@ -63,6 +79,9 @@ class Counter {
   }
 }
 
+/**
+ * Клиентский код
+ */
 function counterApp() {
   const observer1 = new ConsoleObserver();
   const observer2 = new AlertObserver();
